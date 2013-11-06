@@ -8,7 +8,7 @@ import os
 import sys
 
 
-PROG_NAME = "proc2stats"
+PROG_NAME = "proc2statsd"
 curdir = os.path.split(sys.path[0])
 
 twistd_path=curdir[0]+"/"+PROG_NAME
