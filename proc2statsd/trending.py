@@ -74,6 +74,7 @@ def collectandsend():
                 lname = line['iname']
                 lvalue = line['ivalue']
                 name = "hostname.%s.%s"
+                log.debug("trending %s, %s, %s" % (name, lvalue, ts))
                 rawsend(name, lvalue, ts)
 
 lctask = lc(collectandsend)
