@@ -3,7 +3,6 @@ import utils
 import procparse
 import time
 from twisted.internet.task import LoopingCall as lc
-import json
 
 
 log = utils.get_logger("trending")
@@ -41,8 +40,8 @@ def collectandsend(procfile, regex, regfield, statfields, fieldnames, fieldtypes
     else:
         for row in statsdata:
             for field in statfields:
-                name = "testproc.%s" % fieldnames[field]
-                value = row[field]
+                name = "testproc.%s" % fieldnames[int(field)]
+                value = row[int(field)]
                 ts = int(time.time())
                 rawsend(name, value, ts)
 
@@ -51,7 +50,7 @@ def collectandsend(procfile, regex, regfield, statfields, fieldnames, fieldtypes
 
 procfile = utils.config.get("stats_diskstats", "file")
 regex = utils.config.get("stats_diskstats", "regex")
-regfield = utils.config.get("stats_diskstats", "regfield")
+regfield = int(utils.config.get("stats_diskstats", "regfield"))
 statfields = utils.config.get("stats_diskstats", "statfields")
 fieldnames = utils.config.get("stats_diskstats", "fieldnames")
 fieldtypes = utils.config.get("stats_diskstats", "fieldtypes")
