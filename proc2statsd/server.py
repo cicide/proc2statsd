@@ -29,7 +29,7 @@ def addServices():
 
 
     """
-    import trending.py
+    import trending
 
 
 def runTests():
