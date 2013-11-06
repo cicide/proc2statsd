@@ -73,7 +73,7 @@ def collectandsend():
                 log.debug(line)
                 lname = line['iname']
                 lvalue = line['ivalue']
-                name = "hostname.%s.%s"
+                name = "hostname.%s.%s" % (rowname, lname)
                 log.debug("trending %s, %s, %s" % (name, lvalue, ts))
                 rawsend(name, lvalue, ts)
 
