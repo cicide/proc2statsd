@@ -29,7 +29,8 @@ def rawsend(name, value, tstamp):
     else:
         log.debug('trending %s, %s, %s' % (name, value, tstamp))
         for r in raw:
-            return r.send(name, value, int(tstamp))
+            log.debug(r)
+            return r.send(name, value, tstamp)
 
 
 def collectandsend():
