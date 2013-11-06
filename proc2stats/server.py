@@ -33,6 +33,7 @@ def addServices():
 
 
 def runTests():
+    pass
     
 reactor.callWhenRunning(addServices)
 if testMode:
