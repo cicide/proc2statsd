@@ -27,6 +27,7 @@ def rawsend(name, value, tstamp):
     if mode == "test":
         log.debug('trending %s, %s, %s' % (name, value, tstamp))
     else:
+        log.debug('trending %s, %s, %s' % (name, value, tstamp))
         for r in raw:
             return r.send(name, value, int(tstamp))
 
@@ -50,8 +51,6 @@ def collectandsend():
         for row in statsdata:
             log.debug(statfields)
             for field in statfields:
-                log.debug(fieldnames)
-                log.debug(field)
                 name = "testproc.%s" % fieldnames[int(field)-1].strip()
                 value = row[int(field)]
                 ts = int(time.time())
