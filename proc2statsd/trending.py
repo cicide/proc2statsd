@@ -57,4 +57,4 @@ fieldnames = utils.config.get("stats_diskstats", "fieldnames")
 fieldtypes = utils.config.get("stats_diskstats", "fieldtypes")
 
 lctask = lc(collectandsend, (procfile, regex, regfield, statfields, fieldnames, fieldtypes))
-lc.start(5)
+lctask.start(5)
