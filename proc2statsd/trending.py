@@ -26,7 +26,7 @@ def rawsend(name, value, tstamp):
             return r.send(name, value, int(tstamp))
 
 
-def collectandsend(procfile, regex, regfield, statfields, fieldnames, fieldtypes)
+def collectandsend(procfile, regex, regfield, statfields, fieldnames, fieldtypes):
 
     statsdata = procparse.getprocdata(procfile, regfield, regex, statfields)
 
