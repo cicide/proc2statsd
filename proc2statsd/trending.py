@@ -8,7 +8,8 @@ import json
 
 log = utils.get_logger("trending")
 
-serverlist = list(utils.config.get("statsd", "server"))
+serverlist = utils.config.get("statsd", "server")
+#TODO - Fix this for a full list of servers
 slist = [serverlist]
 log.debug(serverlist)
 log.debug(slist)
