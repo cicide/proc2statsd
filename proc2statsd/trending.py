@@ -37,8 +37,8 @@ def collectandsend():
     procfile = utils.config.get("stats_diskstats", "file")
     regex = utils.config.get("stats_diskstats", "regex")
     regfield = int(utils.config.get("stats_diskstats", "regfield"))
-    statfields = utils.config.get("stats_diskstats", "statfields").split(",").strip()
-    fieldnames = utils.config.get("stats_diskstats", "fieldnames").split(",").strip()
+    statfields = utils.config.get("stats_diskstats", "statfields").split(",")
+    fieldnames = utils.config.get("stats_diskstats", "fieldnames").split(",")
     fieldtypes = utils.config.get("stats_diskstats", "fieldtypes")
 
     statsdata = procparse.getprocdata(procfile, regfield, regex, statfields)
@@ -51,7 +51,7 @@ def collectandsend():
             log.debug(statfields)
             for field in statfields:
                 log.debug(row,field)
-                name = "testproc.%s" % fieldnames[int(field)]
+                name = "testproc.%s" % fieldnames[int(field)].strip()
                 value = row[int(field)]
                 ts = int(time.time())
                 rawsend(name, value, ts)
