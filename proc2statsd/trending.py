@@ -49,7 +49,7 @@ def collectandsend(procfile, regex, regfield, statfields, fieldnames, fieldtypes
 
 # TODO - Do looping call here
 
-procfile = utils.config.get("stats_diskstats", "/proc/diskstats")
+procfile = utils.config.get("stats_diskstats", "file")
 regex = utils.config.get("stats_diskstats", "regex")
 regfield = utils.config.get("stats_diskstats", "regfield")
 statfields = utils.config.get("stats_diskstats", "statfields")
