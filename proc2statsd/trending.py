@@ -52,7 +52,7 @@ def collectandsend():
             for field in statfields:
                 log.debug(fieldnames)
                 log.debug(field)
-                name = "testproc.%s" % fieldnames[int(field)].strip()
+                name = "testproc.%s" % fieldnames[int(field)-1].strip()
                 value = row[int(field)]
                 ts = int(time.time())
                 rawsend(name, value, ts)
