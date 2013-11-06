@@ -31,7 +31,14 @@ def rawsend(name, value, tstamp):
             return r.send(name, value, int(tstamp))
 
 
-def collectandsend(procfile, regex, regfield, statfields, fieldnames, fieldtypes):
+def collectandsend():
+
+    procfile = utils.config.get("stats_diskstats", "file")
+    regex = utils.config.get("stats_diskstats", "regex")
+    regfield = int(utils.config.get("stats_diskstats", "regfield"))
+    statfields = utils.config.get("stats_diskstats", "statfields")
+    fieldnames = utils.config.get("stats_diskstats", "fieldnames")
+    fieldtypes = utils.config.get("stats_diskstats", "fieldtypes")
 
     statsdata = procparse.getprocdata(procfile, regfield, regex, statfields)
 
@@ -46,14 +53,6 @@ def collectandsend(procfile, regex, regfield, statfields, fieldnames, fieldtypes
                 rawsend(name, value, ts)
 
 
-# TODO - Do looping call here
 
-procfile = utils.config.get("stats_diskstats", "file")
-regex = utils.config.get("stats_diskstats", "regex")
-regfield = int(utils.config.get("stats_diskstats", "regfield"))
-statfields = utils.config.get("stats_diskstats", "statfields")
-fieldnames = utils.config.get("stats_diskstats", "fieldnames")
-fieldtypes = utils.config.get("stats_diskstats", "fieldtypes")
-
-lctask = lc(collectandsend(procfile, regex, regfield, statfields, fieldnames, fieldtypes))
+lctask = lc(collectandsend)
 lctask.start(5)
