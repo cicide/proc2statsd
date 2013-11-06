@@ -67,11 +67,11 @@ def collectandsend():
                 #value = row[int(field)]
                 #ts = int(time.time())
                 #rawsend(name, value, ts)
-            rowname = row['name']
+            rowname = row['name'].strip()
             rowdata = row['data']
             for line in rowdata:
                 log.debug(line)
-                lname = line['iname']
+                lname = line['iname'].strip()
                 lvalue = line['ivalue']
                 name = "hostname.%s.%s" % (rowname, lname)
                 log.debug("trending %s, %s, %s" % (name, lvalue, ts))
