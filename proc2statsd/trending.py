@@ -50,7 +50,8 @@ def collectandsend():
         for row in statsdata:
             log.debug(statfields)
             for field in statfields:
-                log.debug(row,field)
+                log.debug(fieldnames)
+                log.debug(field)
                 name = "testproc.%s" % fieldnames[int(field)].strip()
                 value = row[int(field)]
                 ts = int(time.time())
