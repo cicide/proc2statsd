@@ -53,21 +53,28 @@ def collectandsend():
     fieldnames = utils.config.get("stats_diskstats", "fieldnames").split(",")
     fieldtypes = utils.config.get("stats_diskstats", "fieldtypes")
 
-    statsdata = procparse.getprocdata(procfile, regfield, regex, statfields)
+    statsdata = procparse.getprocdata(procfile, regfield, regex, statfields, fieldnames)
 
     if not statsdata:
         pass
     else:
+        ts = int(time.time())
         log.debug(statsdata)
         for row in statsdata:
-            log.debug(statfields)
-            for field in statfields:
-                name = "testproc.%s" % fieldnames[int(field)-1].strip()
-                value = row[int(field)]
-                ts = int(time.time())
-                rawsend(name, value, ts)
-
-
+            #log.debug(statfields)
+            #for field in statfields:
+                #name = "testproc.%s" % fieldnames[int(field)-1].strip()
+                #value = row[int(field)]
+                #ts = int(time.time())
+                #rawsend(name, value, ts)
+            rowname = row['name']
+            rowdata = row['data']
+            for line in rowdata:
+                log.debug(line)
+                lname = line['iname']
+                lvalue = line['ivalue']
+                name = "hostname.%s.%s"
+                rawsend(name, lvalue, ts)
 
 lctask = lc(collectandsend)
 lctask.start(5)

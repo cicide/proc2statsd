@@ -38,7 +38,7 @@ def parsefile(fileloc):
     return contentlist
 
 
-def getprocdata(fileloc, regfield = 0, regstring = '.*', fieldlist=[]):
+def getprocdata(fileloc, regfield = 0, regstring = '.*', fieldlist=[], fieldnames=[]):
     """
     Process file data for rows which have a regfield that matches the regstring and return a list of lists with
     fields identified by fieldlist
@@ -54,7 +54,6 @@ def getprocdata(fileloc, regfield = 0, regstring = '.*', fieldlist=[]):
     resultlist = []
     filedata = parsefile(fileloc)
     pattern = str(regstring)
-    log.debug(pattern)
     if not filedata:
         log.debug('no file data found')
         return []
@@ -62,17 +61,15 @@ def getprocdata(fileloc, regfield = 0, regstring = '.*', fieldlist=[]):
         for row in filedata:
             searchdat = str(row[regfield])
             patt = re.compile(pattern)
-            log.debug(patt)
-            log.debug('searching for %s in %s' % (regstring, searchdat))
+            log.debug('searching for %s in %s' % (pattern, searchdat))
             x = patt.search(searchdat)
-            log.debug(x)
             if x:
-                log.debug('found requested pattern')
-                rowresult = [row[regfield]]
-                log.debug(fieldlist)
+                rowresult = {'name': row[regfield], 'data': []}
                 for item in fieldlist:
                     log.debug(item)
-                    rowresult.append(row[int(item)])
+                    iname = fieldnames[int(item)]
+                    ivalue = row[int(item)]
+                    rowresult['data'].append({'iname': iname, 'ivalue': ivalue})
                 resultlist.append(rowresult)
             else:
                 log.debug('pattern not found')
