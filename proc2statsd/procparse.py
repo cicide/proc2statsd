@@ -18,6 +18,8 @@ def parsefile(fileloc):
     @return contentlist:
     """
 
+    log.debug('parsing %s' %  fileloc)
+
     contentlist = []
 
     try:
@@ -30,6 +32,8 @@ def parsefile(fileloc):
     for x in lines:
         linedata = x.split()
         contentlist.append(linedata)
+
+    log.debug(contentlist)
 
     return contentlist
 
@@ -46,10 +50,12 @@ def getprocdata(fileloc, regfield = 0, regstring = '.*', fieldlist=[]):
     @return datalist:
     """
 
+    log.debug('in get proc data')
     resultlist = []
     filedata = parsefile(fileloc)
     pattern = re.compile(regstring)
     if not filedata:
+        log.debug('no file data found')
         return []
     else:
         for row in filedata:
