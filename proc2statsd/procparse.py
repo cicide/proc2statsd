@@ -54,14 +54,16 @@ def getprocdata(fileloc, regfield = 0, regstring = '.*', fieldlist=[]):
     resultlist = []
     filedata = parsefile(fileloc)
     pattern = re.compile(str(regstring))
+    log.debug(pattern)
     if not filedata:
         log.debug('no file data found')
         return []
     else:
         for row in filedata:
-            log.debug(row)
-            log.debug('searching for %s in %s' % (regstring, row[regfield]))
-            x = pattern.search(str(row[regfield]))
+            searchdat = str(row[regfield])
+            log.debug(pattern)
+            log.debug('searching for %s in %s' % (regstring, searchdat))
+            x = pattern.search(searchdat)
             log.debug(x)
             if x:
                 log.debug('found requested pattern')
