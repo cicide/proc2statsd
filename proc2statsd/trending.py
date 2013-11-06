@@ -37,7 +37,7 @@ def collectandsend():
     procfile = utils.config.get("stats_diskstats", "file")
     regex = utils.config.get("stats_diskstats", "regex")
     regfield = int(utils.config.get("stats_diskstats", "regfield"))
-    statfields = utils.config.get("stats_diskstats", "statfields")
+    statfields = utils.config.get("stats_diskstats", "statfields").split(",")
     fieldnames = utils.config.get("stats_diskstats", "fieldnames")
     fieldtypes = utils.config.get("stats_diskstats", "fieldtypes")
 
