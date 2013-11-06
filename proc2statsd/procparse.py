@@ -62,7 +62,7 @@ def getprocdata(fileloc, regfield = 0, regstring = '.*', fieldlist=[]):
         for row in filedata:
             searchdat = str(row[regfield])
             patt = re.compile(pattern)
-            log.debug(pattern)
+            log.debug(patt)
             log.debug('searching for %s in %s' % (regstring, searchdat))
             x = patt.search(searchdat)
             log.debug(x)
