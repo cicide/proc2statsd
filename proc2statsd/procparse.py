@@ -61,7 +61,9 @@ def getprocdata(fileloc, regfield = 0, regstring = '.*', fieldlist=[]):
         for row in filedata:
             log.debug(row)
             log.debug('searching for %s in %s' % (regstring, row[regfield]))
-            if pattern.search(str(row[regfield])):
+            x = pattern.search(str(row[regfield]))
+            log.debug(x)
+            if x:
                 log.debug('found requested pattern')
                 rowresult = [row[regfield]]
                 for item in fieldlist:
