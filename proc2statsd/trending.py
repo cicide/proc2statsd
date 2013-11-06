@@ -7,11 +7,12 @@ from twisted.internet.task import LoopingCall as lc
 
 log = utils.get_logger("trending")
 
-serverlist = utils.config.get("statsd", "server")
+serverlist = list(utils.config.get("statsd", "server"))
 mode = utils.config.get("general", "mode")
 
 statsd_conn = raw = []
 for server in serverlist:
+    log.debug(server)
     svr, prt = server.split(':')
     statsd = statsd.Connection(host=svr, port=prt, sample_rate=1, disabled=False)
     statsd_conn.append(statsd)
