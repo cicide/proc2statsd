@@ -53,7 +53,7 @@ def getprocdata(fileloc, regfield = 0, regstring = '.*', fieldlist=[]):
     log.debug('in get proc data')
     resultlist = []
     filedata = parsefile(fileloc)
-    pattern = re.compile(str(regstring))
+    pattern = str(regstring)
     log.debug(pattern)
     if not filedata:
         log.debug('no file data found')
@@ -61,9 +61,10 @@ def getprocdata(fileloc, regfield = 0, regstring = '.*', fieldlist=[]):
     else:
         for row in filedata:
             searchdat = str(row[regfield])
+            patt = re.compile(pattern)
             log.debug(pattern)
             log.debug('searching for %s in %s' % (regstring, searchdat))
-            x = pattern.search(searchdat)
+            x = patt.search(searchdat)
             log.debug(x)
             if x:
                 log.debug('found requested pattern')
