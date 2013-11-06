@@ -8,6 +8,8 @@ from twisted.internet.task import LoopingCall as lc
 log = utils.get_logger("trending")
 
 serverlist = utils.config.get("statsd", "server")
+hostname = utils.config.get("general", "hostname")
+
 #TODO - Fix this for a full list of servers
 slist = [serverlist]
 log.debug(serverlist)
@@ -19,7 +21,7 @@ statsd_conn = raw = []
 statsDServerIP = '10.100.200.81'
 statsDServerPort = 8125
 statsd_conn = statsd.Connection(host=statsDServerIP, port=statsDServerPort, sample_rate=1, disabled=False)
-raw = statsd.Raw('dbManager', statsd_conn)
+raw = statsd.Raw(hostname, statsd_conn)
 
 def rawsend(name, value, tstamp):
     #log.debug('trending %s, %s, %s' % (name, value, tstamp))
@@ -73,7 +75,7 @@ def collectandsend():
                 log.debug(line)
                 lname = line['iname'].strip()
                 lvalue = line['ivalue']
-                name = "hostname.%s.%s" % (rowname, lname)
+                name = "%s.%s" % (rowname, lname)
                 log.debug("trending %s, %s, %s" % (name, lvalue, ts))
                 rawsend(name, lvalue, ts)
 
