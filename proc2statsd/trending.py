@@ -19,9 +19,9 @@ statsd_conn = raw = []
 for server in slist:
     log.debug(server)
     svr, prt = server.split(':')
-    statsd = statsd.Connection(host=svr, port=prt, sample_rate=1, disabled=False)
-    statsd_conn.append(statsd)
-    raw.append(statsd.Raw('dbManager', statsd_conn))
+    sdc = statsd.Connection(host=svr, port=prt, sample_rate=1, disabled=False)
+    statsd_conn.append(sdc)
+    raw.append(statsd.Raw('procstats', sdc))
 
 
 def rawsend(name, value, tstamp):
