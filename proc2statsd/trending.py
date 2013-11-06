@@ -9,7 +9,7 @@ import json
 log = utils.get_logger("trending")
 
 serverlist = list(utils.config.get("statsd", "server"))
-slist = json.loads(serverlist)
+slist = [serverlist]
 log.debug(serverlist)
 log.debug(slist)
 mode = utils.config.get("general", "mode")
