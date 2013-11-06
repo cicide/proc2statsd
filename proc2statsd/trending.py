@@ -32,6 +32,7 @@ def rawsend(name, value, tstamp):
 
 
 def collectandsend():
+    log.debug('collect and send running')
 
     procfile = utils.config.get("stats_diskstats", "file")
     regex = utils.config.get("stats_diskstats", "regex")
