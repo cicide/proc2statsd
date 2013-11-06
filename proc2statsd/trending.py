@@ -3,15 +3,19 @@ import utils
 import procparse
 import time
 from twisted.internet.task import LoopingCall as lc
+import json
 
 
 log = utils.get_logger("trending")
 
 serverlist = list(utils.config.get("statsd", "server"))
+slist = json.loads(serverlist)
+log.debug(serverlist)
+log.debug(slist)
 mode = utils.config.get("general", "mode")
 
 statsd_conn = raw = []
-for server in serverlist:
+for server in slist:
     log.debug(server)
     svr, prt = server.split(':')
     statsd = statsd.Connection(host=svr, port=prt, sample_rate=1, disabled=False)
