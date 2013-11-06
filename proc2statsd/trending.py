@@ -21,7 +21,7 @@ statsDServerPort = 8125
 statsd_conn = statsd.Connection(host=statsDServerIP, port=statsDServerPort, sample_rate=1, disabled=False)
 raw = statsd.Raw('dbManager', statsd_conn)
 
-def rawSend(name, value, tstamp):
+def rawsend(name, value, tstamp):
     #log.debug('trending %s, %s, %s' % (name, value, tstamp))
     return raw.send(name, value, int(tstamp))
 
