@@ -45,8 +45,11 @@ def collectandsend():
     if not statsdata:
         pass
     else:
+        log.debug(statsdata)
         for row in statsdata:
+            log.debug(statfields)
             for field in statfields:
+                log.debug(row,field)
                 name = "testproc.%s" % fieldnames[int(field)]
                 value = row[int(field)]
                 ts = int(time.time())
